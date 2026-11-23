@@ -1,0 +1,490 @@
+/* ==========================================================================
+   EDITOR MODE — LOCAL .WAV UPLOADER, PRODUCER ACCOUNTS & PUBLIC PROFILE
+   ========================================================================== */
+
+.upload-drawer {
+  margin-top: 1.5rem;
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--border-brass);
+  background: var(--panel-dark);
+  padding: clamp(1.25rem, 2.5vw, 1.85rem);
+  box-shadow: var(--shadow-panel);
+}
+
+.drawer-header {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1.25rem;
+  padding-bottom: 0.9rem;
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+.drawer-header h2 {
+  font-size: 1.38rem;
+  color: var(--parchment-light);
+}
+
+.upload-drop-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
+  margin-bottom: 1.15rem;
+}
+
+.upload-drop-grid.is-single {
+  grid-template-columns: 1fr;
+}
+
+.track-mode-selector {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-bottom: 1.1rem;
+}
+
+.track-mode-pill {
+  flex: 1 1 180px;
+  border: 1px solid var(--border-subtle);
+  background: var(--panel-inset);
+  color: var(--text-secondary);
+  border-radius: var(--radius-md);
+  padding: 0.6rem 0.85rem;
+  text-align: left;
+  transition: border-color 150ms, background 150ms, color 150ms;
+}
+
+.track-mode-pill strong {
+  display: block;
+  font-size: 0.86rem;
+  color: var(--parchment-light);
+}
+
+.track-mode-pill span {
+  display: block;
+  font-size: 0.74rem;
+  color: var(--text-muted);
+  margin-top: 0.12rem;
+}
+
+.track-mode-pill.is-active {
+  border-color: var(--brass-bright);
+  background: rgba(212, 149, 63, 0.14);
+}
+
+.track-mode-pill.is-active strong {
+  color: var(--brass-bright);
+}
+
+.cloud-login-box {
+  margin-bottom: 1rem;
+  padding: 0.95rem 1rem;
+  border-radius: var(--radius-md);
+  background: rgba(115, 148, 96, 0.08);
+  border: 1px solid rgba(144, 181, 122, 0.35);
+}
+
+.wav-dropzone {
+  position: relative;
+  border: 1.5px dashed var(--border-brass);
+  border-radius: var(--radius-md);
+  background: var(--panel-inset);
+  padding: 1.25rem 1rem;
+  text-align: center;
+  cursor: pointer;
+  transition: border-color 160ms, background 160ms;
+}
+
+.wav-dropzone:hover,
+.wav-dropzone.is-dragover {
+  border-color: var(--brass-bright);
+  background: rgba(212, 149, 63, 0.09);
+}
+
+.wav-dropzone.has-file {
+  border-style: solid;
+  border-color: var(--sage-bright);
+  background: rgba(115, 148, 96, 0.09);
+}
+
+.wav-dropzone input[type="file"] {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.dropzone-badge {
+  display: inline-block;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  font-weight: 700;
+  padding: 0.18rem 0.55rem;
+  border-radius: 999px;
+  margin-bottom: 0.5rem;
+}
+
+.dropzone-badge.is-mix {
+  background: rgba(201, 88, 58, 0.22);
+  color: #f7ad99;
+}
+
+.dropzone-badge.is-master {
+  background: rgba(212, 149, 63, 0.24);
+  color: var(--brass-bright);
+}
+
+.dropzone-title {
+  font-weight: 600;
+  color: var(--parchment-light);
+  font-size: 0.94rem;
+}
+
+.dropzone-file {
+  font-family: var(--font-mono);
+  font-size: 0.76rem;
+  color: var(--text-secondary);
+  margin-top: 0.3rem;
+  word-break: break-all;
+}
+
+/* Cover Art + Hugging Face Panel */
+.cover-studio-box {
+  margin-top: 1rem;
+  padding: 1rem 1.1rem;
+  border-radius: var(--radius-md);
+  background: rgba(16, 13, 11, 0.85);
+  border: 1px solid var(--border-subtle);
+  display: grid;
+  grid-template-columns: 112px minmax(0, 1fr);
+  gap: 1.1rem;
+  align-items: start;
+}
+
+.cover-preview-square {
+  width: 112px;
+  height: 112px;
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+  border: 1px solid var(--border-brass);
+  background: var(--wood-walnut);
+  position: relative;
+}
+
+.cover-preview-square img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.hf-controls-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 0.7rem;
+}
+
+.hf-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.55rem;
+  align-items: center;
+}
+
+.hf-row input,
+.hf-row select {
+  background: var(--panel-elevated);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-sm);
+  padding: 0.45rem 0.65rem;
+  font-size: 0.82rem;
+  color: var(--text-primary);
+}
+
+.hf-status-line {
+  font-size: 0.78rem;
+  color: var(--text-secondary);
+}
+
+.upload-progress {
+  margin-top: 0.85rem;
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  color: var(--brass-bright);
+  min-height: 1.2em;
+}
+
+/* ==========================================================================
+   HEADER ACCOUNT CHIP & PRODUCER PUBLIC PROFILE SHOWCASE
+   ========================================================================== */
+.account-pill-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: var(--panel-elevated);
+  border: 1px solid var(--border-subtle);
+  border-radius: 999px;
+  padding: 3px 0.8rem 3px 4px;
+  color: var(--parchment-light);
+  font-size: 0.8rem;
+  font-weight: 500;
+  transition: border-color 150ms, background 150ms;
+}
+
+.account-pill-btn:hover {
+  border-color: var(--border-brass);
+  background: rgba(212, 149, 63, 0.12);
+}
+
+.account-pill-avatar {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 1.5px solid var(--brass);
+}
+
+/* Public Producer Identity Header inside About Section */
+.producer-identity-card {
+  display: flex;
+  align-items: center;
+  gap: 1.35rem;
+  margin-bottom: 1.5rem;
+  padding-bottom: 1.35rem;
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+.producer-portrait-frame {
+  width: 96px;
+  height: 96px;
+  border-radius: 50%;
+  padding: 4px;
+  background: linear-gradient(145deg, var(--brass-bright), #7b4c1d 55%, #b93627);
+  box-shadow: var(--shadow-panel);
+  flex-shrink: 0;
+}
+
+.producer-portrait-frame img {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  object-fit: cover;
+  background: var(--wood-walnut);
+}
+
+.producer-identity-meta {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.producer-name-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.65rem;
+}
+
+.producer-name-row h3 {
+  font-size: 1.55rem;
+  color: var(--parchment-light);
+}
+
+.producer-handle {
+  font-family: var(--font-mono);
+  font-size: 0.82rem;
+  color: var(--brass-bright);
+}
+
+.producer-role-text {
+  font-size: 0.94rem;
+  color: var(--text-secondary);
+}
+
+.specialties-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.45rem;
+  margin-top: 0.85rem;
+}
+
+.specialty-pill {
+  font-size: 0.78rem;
+  padding: 0.26rem 0.68rem;
+  border-radius: 999px;
+  background: var(--panel-elevated);
+  border: 1px solid var(--border-brass);
+  color: var(--parchment-mid);
+}
+
+.socials-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+  margin-top: 1rem;
+}
+
+.social-pill-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  font-size: 0.82rem;
+  font-weight: 600;
+  text-decoration: none;
+  padding: 0.36rem 0.78rem;
+  border-radius: var(--radius-md);
+  background: rgba(244, 235, 217, 0.05);
+  border: 1px solid var(--border-subtle);
+  color: var(--parchment-light);
+}
+
+.social-pill-link:hover {
+  border-color: var(--brass-bright);
+  background: rgba(212, 149, 63, 0.14);
+}
+
+/* Account & Profile Customizer Drawer */
+.profile-editor-panel {
+  margin-bottom: 1.5rem;
+  padding: 1.35rem 1.5rem;
+  border-radius: var(--radius-lg);
+  background: var(--panel-dark);
+  border: 1px solid var(--border-brass);
+  box-shadow: var(--shadow-panel);
+}
+
+.account-tabs-bar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  margin-bottom: 1.15rem;
+  padding-bottom: 0.85rem;
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+.account-tabs {
+  display: inline-flex;
+  gap: 0.4rem;
+  flex-wrap: wrap;
+}
+
+.acc-tab-btn {
+  border: 1px solid var(--border-subtle);
+  background: var(--panel-inset);
+  color: var(--text-secondary);
+  font-size: 0.82rem;
+  font-weight: 600;
+  padding: 0.45rem 0.9rem;
+  border-radius: var(--radius-md);
+  transition: all 150ms;
+}
+
+.acc-tab-btn.is-active {
+  background: var(--brass);
+  border-color: var(--brass-bright);
+  color: var(--ink-espresso);
+}
+
+.avatar-upload-strip {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 1.15rem;
+  padding: 0.9rem 1rem;
+  border-radius: var(--radius-md);
+  background: var(--panel-inset);
+  border: 1px solid var(--border-subtle);
+  margin-bottom: 0.35rem;
+}
+
+.avatar-preview-circle {
+  width: 72px;
+  height: 72px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid var(--brass);
+  background: var(--wood-walnut);
+}
+
+.accounts-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.65rem;
+}
+
+.account-item {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.9rem;
+  padding: 0.75rem 1rem;
+  border-radius: var(--radius-md);
+  background: var(--panel-inset);
+  border: 1px solid var(--border-subtle);
+}
+
+.account-item.is-active {
+  border-color: var(--brass-bright);
+  background: rgba(212, 149, 63, 0.1);
+}
+
+.account-mini-avatar {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 1.5px solid var(--border-brass);
+}
+
+.account-item-info {
+  flex: 1 1 180px;
+  display: flex;
+  flex-direction: column;
+}
+
+.account-item-info strong {
+  color: var(--parchment-light);
+  font-size: 0.95rem;
+}
+
+.account-item-info span {
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+}
+
+.account-item-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+}
+
+.account-active-tag {
+  font-family: var(--font-mono);
+  font-size: 0.74rem;
+  color: var(--sage-bright);
+  background: rgba(115, 148, 96, 0.16);
+  border: 1px solid rgba(144, 181, 122, 0.4);
+  padding: 0.24rem 0.6rem;
+  border-radius: 999px;
+}
+
+@media (max-width: 760px) {
+  .upload-drop-grid,
+  .cover-studio-box {
+    grid-template-columns: 1fr;
+  }
+
+  .producer-identity-card {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .producer-name-row,
+  .specialties-row,
+  .socials-row {
+    justify-content: center;
+  }
+}

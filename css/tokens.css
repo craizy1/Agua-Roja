@@ -1,0 +1,227 @@
+/* ==========================================================================
+   VINTAGE ANALOG MASTERING STUDIO — DESIGN TOKENS
+   Palette: American Walnut, Brushed Brass, Warm Parchment, Anodized Charcoal
+   ========================================================================== */
+
+:root {
+  /* Wood & Cabinet Surfaces */
+  --wood-deep: #160f0b;
+  --wood-walnut: #251912;
+  --wood-grain: #342318;
+  --wood-highlight: #4c3322;
+  --wood-trim: #5c3d28;
+
+  /* Anodized Console Faceplates */
+  --chassis-bg: #14110f;
+  --panel-dark: #1b1714;
+  --panel-elevated: #231e1a;
+  --panel-inset: #100d0b;
+  --border-subtle: rgba(232, 207, 170, 0.12);
+  --border-brass: rgba(212, 149, 63, 0.36);
+
+  /* Parchment / Analog Meter & Editorial Surfaces */
+  --parchment-light: #f3e8d4;
+  --parchment-mid: #e6d5b8;
+  --parchment-warm: #d9c29c;
+  --ink-espresso: #1c140e;
+  --ink-espresso-muted: #523e2e;
+
+  /* Typography Ink on Dark Surfaces (>= 4.5:1 verified) */
+  --text-primary: #f4ebd9;
+  --text-secondary: #c9b79c;
+  --text-muted: #9b8870;
+
+  /* Studio Hardware Lamps & Accents */
+  --brass: #d4953f;
+  --brass-bright: #ebb45f;
+  --brass-dim: #8a5e22;
+  --oxblood: #c9583a;
+  --oxblood-bright: #e37152;
+  --sage: #739460;
+  --sage-bright: #90b57a;
+  --vu-red: #c63f2c;
+
+  /* Typography */
+  --font-display: 'Fraunces', Georgia, 'Times New Roman', serif;
+  --font-sans: 'DM Sans', system-ui, -apple-system, sans-serif;
+  --font-mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, monospace;
+
+  /* Elevation & Depth (Real offset + soft blur) */
+  --shadow-cabinet: 0 24px 56px rgba(6, 3, 1, 0.72), 0 6px 16px rgba(6, 3, 1, 0.5);
+  --shadow-panel: 0 10px 28px rgba(8, 4, 2, 0.48), 0 2px 6px rgba(8, 4, 2, 0.36);
+  --shadow-inset: inset 0 2px 8px rgba(0, 0, 0, 0.65), inset 0 1px 0 rgba(255, 240, 215, 0.05);
+  --shadow-button: 0 4px 10px rgba(0, 0, 0, 0.45), inset 0 1px 0 rgba(255, 244, 224, 0.22);
+
+  /* Radii & Spacing */
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --radius-lg: 14px;
+  --radius-xl: 20px;
+
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-5: 1.5rem;
+  --space-6: 2rem;
+  --space-8: 3rem;
+  --space-10: 4.5rem;
+
+  --ease-analog: cubic-bezier(0.22, 1, 0.36, 1);
+  --container-max: 1240px;
+}
+
+/* ==========================================================================
+   BASE RESET & BROWSER SURFACES
+   ========================================================================== */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  background-color: var(--wood-deep);
+  color: var(--text-primary);
+  font-size: 16px;
+  -webkit-font-smoothing: antialiased;
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-sans);
+  line-height: 1.6;
+  color: var(--text-primary);
+  background-color: var(--wood-deep);
+  /* Subtle warm walnut studio ambiance */
+  background-image:
+    radial-gradient(ellipse 90% 55% at 50% 0%, rgba(102, 66, 36, 0.28), transparent 72%),
+    repeating-linear-gradient(
+      90deg,
+      rgba(255, 228, 192, 0.012) 0px,
+      rgba(255, 228, 192, 0.012) 2px,
+      transparent 2px,
+      transparent 14px
+    );
+  min-height: 100vh;
+  caret-color: var(--brass-bright);
+  overflow-x: hidden;
+}
+
+/* Themed browser surfaces */
+::selection {
+  background: var(--brass);
+  color: var(--ink-espresso);
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--wood-deep);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--wood-highlight);
+  border: 2px solid var(--wood-deep);
+  border-radius: 999px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--brass-dim);
+}
+
+:focus-visible {
+  outline: 2px solid var(--brass-bright);
+  outline-offset: 3px;
+}
+
+a {
+  color: var(--brass-bright);
+  text-underline-offset: 4px;
+  text-decoration-thickness: 1px;
+  transition: color 160ms var(--ease-analog);
+}
+
+a:hover {
+  color: var(--parchment-light);
+}
+
+img,
+svg {
+  display: block;
+}
+
+button,
+input,
+select,
+textarea {
+  font-family: inherit;
+  color: inherit;
+}
+
+button {
+  cursor: pointer;
+}
+
+h1, h2, h3, h4 {
+  font-family: var(--font-display);
+  font-weight: 500;
+  letter-spacing: -0.025em;
+  line-height: 1.15;
+  margin: 0;
+  text-wrap: balance;
+}
+
+p {
+  margin: 0;
+  max-width: 68ch;
+}
+
+.tabular-nums {
+  font-variant-numeric: tabular-nums;
+  font-family: var(--font-mono);
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* Woodgrain utility for cabinet cheeks & frames */
+.walnut-surface {
+  background-color: var(--wood-walnut);
+  background-image:
+    linear-gradient(180deg, rgba(255, 224, 180, 0.08) 0%, transparent 12%, rgba(0, 0, 0, 0.32) 100%),
+    repeating-linear-gradient(
+      92deg,
+      rgba(16, 8, 4, 0.24) 0px,
+      rgba(16, 8, 4, 0.24) 3px,
+      rgba(92, 59, 36, 0.14) 3px,
+      rgba(92, 59, 36, 0.14) 11px,
+      rgba(28, 16, 9, 0.22) 11px,
+      rgba(28, 16, 9, 0.22) 22px
+    );
+}
+
+/* Reduced motion guard */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

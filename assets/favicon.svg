@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none">
+  <rect width="64" height="64" rx="14" fill="#1D140E"/>
+  <circle cx="30" cy="34" r="22" fill="#110E0C" stroke="#D4953F" stroke-width="2"/>
+  <circle cx="30" cy="34" r="17" stroke="#362A20" stroke-width="1"/>
+  <circle cx="30" cy="34" r="12.5" stroke="#2B2119" stroke-width="1"/>
+  <circle cx="30" cy="34" r="7.5" fill="#C93B2B"/>
+  <circle cx="30" cy="34" r="2.2" fill="#F3E8D4"/>
+  <!-- Iconic Aguja Roja (Red Tonearm / VU Needle) -->
+  <circle cx="51" cy="14" r="5" fill="#D4953F"/>
+  <path d="M51 14 L42 35 L33 41" stroke="#E04332" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+  <circle cx="51" cy="14" r="2" fill="#1D140E"/>
+</svg>

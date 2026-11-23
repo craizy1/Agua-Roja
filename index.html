@@ -1,0 +1,999 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Aguja Roja — Mastering Analógico y Comparador A/B (.WAV) Online</title>
+  <meta
+    name="description"
+    content="Aguja Roja: estudio y portafolio interactivo de ingeniería de mastering analógico. Escucha comparaciones A/B sin pérdida (.WAV) con Loudness Matching LUFS, espectrograma 20 Hz–20 kHz, correlación estéreo y medidores VU."
+  />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://agujaroja.audio/" />
+
+  <!-- Open Graph / Social Previews -->
+  <meta property="og:type" content="website" />
+  <meta property="og:locale" content="es_MX" />
+  <meta property="og:site_name" content="Aguja Roja Mastering" />
+  <meta property="og:title" content="Aguja Roja — Mastering Analógico y Comparador A/B (.WAV)" />
+  <meta
+    property="og:description"
+    content="Calidez analógica justo antes del límite. Compara mezclas y másters .WAV en tiempo real con igualación LUFS y herramientas Pro de medición."
+  />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Aguja Roja — Mastering Analógico A/B" />
+  <meta
+    name="twitter:description"
+    content="Portafolio de ingeniería de mastering con comparador A/B lossless, espectrograma 20Hz–20kHz y correlación estéreo."
+  />
+
+  <!-- Google Structured Data (JSON-LD SEO) -->
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "ProfessionalService",
+      "name": "Aguja Roja Mastering",
+      "description": "Ingeniería de mastering analógico híbrido, stem mastering y pre-máster para vinilo y cassette con comparador A/B sin pérdida en .WAV.",
+      "url": "https://agujaroja.audio/",
+      "priceRange": "$$",
+      "areaServed": "Worldwide",
+      "serviceType": [
+        "Mastering Estéreo",
+        "Stem Mastering",
+        "Pre-Máster para Vinilo y Cassette",
+        "Secuenciado de Álbum y DDP"
+      ],
+      "hasOfferCatalog": {
+        "@type": "OfferCatalog",
+        "name": "Servicios de Mastering Analógico",
+        "itemListElement": [
+          {
+            "@type": "Offer",
+            "itemOffered": { "@type": "Service", "name": "Mastering Estéreo (.WAV 24-bit y Streaming)" }
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": { "@type": "Service", "name": "Stem Mastering Híbrido" }
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": { "@type": "Service", "name": "Pre-Máster para Vinilo y Cassette" }
+          }
+        ]
+      }
+    }
+  </script>
+
+  <link rel="icon" type="image/svg+xml" href="assets/favicon.svg" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=JetBrains+Mono:wght@400;500;600;700&display=swap"
+    rel="stylesheet"
+  />
+  <link rel="stylesheet" href="css/tokens.css" />
+  <link rel="stylesheet" href="css/layout.css" />
+  <link rel="stylesheet" href="css/console.css" />
+  <link rel="stylesheet" href="css/pro-meters.css" />
+  <link rel="stylesheet" href="css/editor.css" />
+</head>
+<body>
+  <!-- ======================================================================
+       HEADER: BRAND AGUJA ROJA, ACCOUNT SWITCHER & EDITOR / CLIENT MODE
+       ====================================================================== -->
+  <header class="site-header">
+    <div class="container header-inner">
+      <a href="#consola" class="brand-mark">
+        <svg class="brand-vinyl-emblem" viewBox="0 0 40 40" fill="none" aria-hidden="true">
+          <circle cx="18.5" cy="21" r="15.5" fill="#120F0D" stroke="#D4953F" stroke-width="1.5" />
+          <circle cx="18.5" cy="21" r="11.5" stroke="#3E2E22" stroke-width="0.85" />
+          <circle cx="18.5" cy="21" r="8" stroke="#30231A" stroke-width="0.85" />
+          <circle cx="18.5" cy="21" r="5" fill="#C93B2B" />
+          <circle cx="18.5" cy="21" r="1.7" fill="#F3E8D4" />
+          <circle cx="33.5" cy="8.5" r="3.4" fill="#D4953F" />
+          <path d="M33.5 8.5 L27 22.5 L21 26.5" stroke="#E04332" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" />
+        </svg>
+        <span class="brand-text">
+          <span class="brand-name" id="brandStudioName">Aguja Roja</span>
+          <span class="brand-role" id="brandEngineerRole">Ingeniero de Máster</span>
+        </span>
+      </a>
+
+      <nav class="main-nav" aria-label="Navegación principal">
+        <a href="#consola">Consola A/B</a>
+        <a href="#sobre-mi">Perfil Público</a>
+        <a href="#servicios">Servicios</a>
+        <a href="#equipo">Equipo</a>
+        <a href="#contacto">Contacto</a>
+      </nav>
+
+      <div class="header-actions">
+        <button type="button" class="account-pill-btn editor-only" id="headerAccountBtn" title="Gestionar cuenta o crear nuevo perfil de productor">
+          <img class="account-pill-avatar" id="headerAccountAvatar" src="" alt="Avatar de cuenta activa" />
+          <span id="headerAccountName">@agujaroja</span>
+        </button>
+
+        <div class="mode-switch" role="group" aria-label="Modo de visualización">
+          <button type="button" class="mode-btn is-active" id="modeEditorBtn" aria-pressed="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
+              <path d="M12 20h9M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4Z" />
+            </svg>
+            Editor
+          </button>
+          <button type="button" class="mode-btn" id="modeClientBtn" aria-pressed="false">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
+              <path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7-10-7-10-7Z" />
+              <circle cx="12" cy="12" r="3" />
+            </svg>
+            Cliente
+          </button>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <!-- ====================================================================
+         HERO + AGUJA ROJA WALNUT CONSOLE + PANEL PRO (MINIMETERS)
+         ==================================================================== -->
+    <section class="hero-section" id="consola">
+      <div class="container">
+        <div class="hero-head">
+          <div>
+            <h1 class="hero-title" id="heroTitle">
+              Calidez analógica justo antes del límite.
+            </h1>
+            <p class="hero-lead" id="heroLead">
+              Compara en tiempo real tu mezcla original frente al máster final sin pérdida (.WAV), con igualación automática LUFS y medidores Pro.
+            </p>
+          </div>
+          <div class="editor-only">
+            <button type="button" class="btn btn-ghost btn-sm" id="toggleProfileEditBtn">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
+                <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
+                <circle cx="12" cy="7" r="4" />
+              </svg>
+              Cuenta y Perfil Público
+            </button>
+          </div>
+        </div>
+
+        <!-- PRODUCER ACCOUNT & PUBLIC PROFILE STUDIO DRAWER (EDITOR MODE) -->
+        <div class="profile-editor-panel editor-only" id="profileEditorPanel" hidden>
+          <div class="account-tabs-bar">
+            <div class="account-tabs" role="tablist" aria-label="Gestión de cuentas y perfil">
+              <button type="button" class="acc-tab-btn is-active" id="tabEditProfileBtn">Personalizar Perfil Público</button>
+              <button type="button" class="acc-tab-btn" id="tabSwitchAccountBtn">Cuentas Guardadas</button>
+              <button type="button" class="acc-tab-btn" id="tabCreateAccountBtn">+ Crear Cuenta de Productor</button>
+            </div>
+            <button type="button" class="btn btn-ghost btn-sm" id="closeProfileDrawerBtn">Cerrar</button>
+          </div>
+
+          <!-- TAB 1: CUSTOMIZE ACTIVE PUBLIC PROFILE + PHOTO -->
+          <div id="profileEditTab">
+            <form id="profileForm" class="vintage-form" style="padding:0; border:none; box-shadow:none; background:transparent;">
+              <div class="avatar-upload-strip">
+                <img class="avatar-preview-circle" id="editorAvatarPreview" src="" alt="Vista previa de foto de perfil" />
+                <div style="flex:1 1 220px;">
+                  <div style="font-weight:600; color:var(--parchment-light); font-size:0.92rem;">Foto de perfil del productor</div>
+                  <p style="font-size:0.8rem; color:var(--text-secondary); margin-top:0.2rem;">
+                    Se recorta automáticamente en formato circular HD y aparece en tu perfil público.
+                  </p>
+                  <div style="display:flex; flex-wrap:wrap; gap:0.5rem; margin-top:0.55rem;">
+                    <label class="btn btn-brass btn-sm" style="cursor:pointer;">
+                      Subir foto de perfil
+                      <input type="file" id="profAvatarInput" accept="image/*" hidden />
+                    </label>
+                    <button type="button" class="btn btn-ghost btn-sm" id="removeAvatarBtn">Usar iniciales</button>
+                  </div>
+                </div>
+              </div>
+
+              <div class="form-row-2">
+                <div class="field"><label for="profDisplayName">Nombre del Productor / Ingeniero</label><input id="profDisplayName" type="text" required /></div>
+                <div class="field"><label for="profHandle">Usuario público (@handle)</label><input id="profHandle" type="text" placeholder="ej. carlos_master" required /></div>
+              </div>
+              <div class="form-row-2">
+                <div class="field"><label for="profStudioName">Nombre del Estudio / Página</label><input id="profStudioName" type="text" required /></div>
+                <div class="field"><label for="profRole">Rol / Especialidad principal</label><input id="profRole" type="text" placeholder="Ej. Ingeniero de Máster & Productor" /></div>
+              </div>
+              <div class="form-row-2">
+                <div class="field"><label for="profHeroTitle">Titular principal del portafolio</label><input id="profHeroTitle" type="text" required /></div>
+                <div class="field"><label for="profSpecialties">Géneros / Especialidades (separados por coma)</label><input id="profSpecialties" type="text" placeholder="Ej. Mastering Estéreo, Vinilo, Indie, Electrónica" /></div>
+              </div>
+              <div class="field"><label for="profHeroLead">Subtítulo descriptivo</label><textarea id="profHeroLead" rows="2"></textarea></div>
+              <div class="form-row-2">
+                <div class="field"><label for="profBio1">Biografía pública (Introducción)</label><textarea id="profBio1" rows="3"></textarea></div>
+                <div class="field"><label for="profBio2">Biografía pública (Filosofía y cadena analógica)</label><textarea id="profBio2" rows="3"></textarea></div>
+              </div>
+              <div class="form-row-2">
+                <div class="field"><label for="profLocation">Ubicación</label><input id="profLocation" type="text" /></div>
+                <div class="field"><label for="profEmail">Correo de contacto</label><input id="profEmail" type="email" /></div>
+              </div>
+              <div class="form-row-2">
+                <div class="field"><label for="profTurnaround">Tiempo de entrega</label><input id="profTurnaround" type="text" /></div>
+                <div class="field"><label for="profRevisions">Política de revisiones</label><input id="profRevisions" type="text" /></div>
+              </div>
+              <div class="form-row-2">
+                <div class="field"><label for="profInstagram">Instagram (usuario o enlace)</label><input id="profInstagram" type="text" placeholder="@agujaroja.audio" /></div>
+                <div class="field"><label for="profSpotify">Créditos / Playlist Spotify (URL)</label><input id="profSpotify" type="text" placeholder="https://open.spotify.com/..." /></div>
+              </div>
+              <div class="form-row-2">
+                <div class="field"><label for="profWebsite">Sitio web externo o enlace de portafolio</label><input id="profWebsite" type="text" placeholder="https://agujaroja.audio" /></div>
+                <div style="display:flex; align-items:flex-end; justify-content:flex-end;"><button type="submit" class="btn btn-brass">Guardar perfil público</button></div>
+              </div>
+            </form>
+          </div>
+
+          <!-- TAB 2: SWITCH BETWEEN PRODUCER ACCOUNTS / CLOUD LOGIN -->
+          <div id="accountSwitchTab" hidden>
+            <div class="cloud-login-box" id="cloudLoginBox" hidden>
+              <div style="display:flex; justify-content:space-between; align-items:center; gap:0.75rem; margin-bottom:0.65rem;">
+                <strong style="font-size:0.88rem; color:var(--parchment-light);">Iniciar sesión en la nube (Supabase)</strong>
+                <button type="button" class="btn btn-danger btn-sm" id="cloudSignOutBtn" hidden>Cerrar sesión</button>
+              </div>
+              <form id="cloudLoginForm" class="form-row-2" style="align-items:end;">
+                <div class="field"><label for="cloudLoginEmail">Correo</label><input id="cloudLoginEmail" type="email" required /></div>
+                <div class="field"><label for="cloudLoginPassword">Contraseña</label><input id="cloudLoginPassword" type="password" required /></div>
+                <div style="grid-column:1 / -1; display:flex; justify-content:flex-end;"><button type="submit" class="btn btn-brass btn-sm">Entrar</button></div>
+              </form>
+            </div>
+            <p style="font-size:0.86rem; color:var(--text-secondary); margin-bottom:0.85rem;">
+              Cada cuenta mantiene su propia librería de pistas aislada. Selecciona un perfil para ver o administrar su catálogo.
+            </p>
+            <div class="accounts-list" id="accountsListContainer"></div>
+          </div>
+
+          <!-- TAB 3: CREATE NEW PRODUCER ACCOUNT -->
+          <div id="accountCreateTab" hidden>
+            <form id="createAccountForm" class="vintage-form" style="padding:0; border:none; box-shadow:none; background:transparent;">
+              <div class="avatar-upload-strip">
+                <img class="avatar-preview-circle" id="newAccAvatarPreview" src="" alt="Avatar de nueva cuenta" />
+                <div>
+                  <div style="font-weight:600; color:var(--parchment-light); font-size:0.9rem;">Foto de perfil inicial (opcional)</div>
+                  <label class="btn btn-ghost btn-sm" style="cursor:pointer; margin-top:0.45rem;">
+                    Elegir fotografía
+                    <input type="file" id="newAccAvatarInput" accept="image/*" hidden />
+                  </label>
+                </div>
+              </div>
+
+              <div class="form-row-2">
+                <div class="field"><label for="newAccName">Nombre completo o artístico</label><input id="newAccName" type="text" placeholder="Ej. Mateo Salas" required /></div>
+                <div class="field"><label for="newAccHandle">Usuario único (@handle)</label><input id="newAccHandle" type="text" placeholder="Ej. mateosalas" required /></div>
+              </div>
+              <div class="form-row-2">
+                <div class="field"><label for="newAccStudio">Nombre del estudio</label><input id="newAccStudio" type="text" value="Aguja Roja" /></div>
+                <div class="field"><label for="newAccRole">Rol profesional</label><input id="newAccRole" type="text" placeholder="Ej. Productor e Ingeniero de Máster" /></div>
+              </div>
+              <div class="form-row-2">
+                <div class="field"><label for="newAccEmail">Correo profesional</label><input id="newAccEmail" type="email" placeholder="nombre@agujaroja.audio" /></div>
+                <div class="field"><label for="newAccPin" id="newAccPinLabel">PIN de acceso local (opcional)</label><input id="newAccPin" type="password" placeholder="Deja vacío en modo local o mín. 6 caracteres en nube" autocomplete="new-password" /></div>
+              </div>
+              <div style="display:flex; justify-content:flex-end;"><button type="submit" class="btn btn-brass">Crear cuenta y activar perfil</button></div>
+            </form>
+          </div>
+        </div>
+
+        <!-- WALNUT MASTERING CONSOLE -->
+        <div class="mastering-console walnut-surface" aria-label="Consola de comparación A/B Aguja Roja">
+          <span class="cabinet-screw tl" aria-hidden="true"></span>
+          <span class="cabinet-screw tr" aria-hidden="true"></span>
+          <span class="cabinet-screw bl" aria-hidden="true"></span>
+          <span class="cabinet-screw br" aria-hidden="true"></span>
+
+          <div class="console-faceplate">
+            <!-- Top Technical Format Bar + Panel Pro Toggle -->
+            <div class="console-top-bar">
+              <div class="track-format-specs">
+                <span class="spec-chip is-lossless" id="specFormatChip">WAV · Sin señal</span>
+                <span class="spec-chip tabular-nums" id="specLufsDeltaChip">Delta: -- dB</span>
+                <span class="spec-chip tabular-nums" id="specPlrChip">PLR Dinámico: -- dB</span>
+                <span class="spec-chip" id="trackLoadingStatus">Listo</span>
+              </div>
+              <div class="console-utility-actions">
+                <button
+                  type="button"
+                  class="pro-toggle-btn is-active"
+                  id="proPanelToggleBtn"
+                  aria-expanded="true"
+                  aria-controls="proMetersRack"
+                  title="Mostrar u ocultar Panel Pro estilo MiniMeters (Tecla P)"
+                >
+                  <span class="pro-lamp" aria-hidden="true"></span>
+                  Panel Pro · MiniMeters
+                </button>
+                <span class="spec-chip" id="cloudModeChip">Modo Local · IndexedDB</span>
+                <span class="spec-chip tabular-nums editor-only" id="storageUsageBadge">IndexedDB: 0 MB</span>
+              </div>
+            </div>
+
+            <!-- Main Stage: Spinning Vinyl Turntable + A/B Controls + Waveform + VU/LUFS -->
+            <div class="console-main-grid">
+              <!-- LEFT: VINTAGE VINYL TURNTABLE -->
+              <div class="turntable-deck" id="turntableDeck">
+                <div class="platter-stage">
+                  <div class="platter-rim" aria-hidden="true"></div>
+                  <div class="vinyl-disc" id="vinylDisc">
+                    <div class="vinyl-label">
+                      <img id="vinylCoverImg" src="" alt="Carátula en el sello central del vinilo" />
+                    </div>
+                    <div class="vinyl-spindle" aria-hidden="true"></div>
+                  </div>
+                  <!-- Stylized Vintage Brushed-Brass & Crimson Aguja Roja Tonearm -->
+                  <svg class="tonearm-svg" viewBox="0 0 82 175" fill="none" aria-hidden="true">
+                    <circle cx="54" cy="26" r="16" fill="#2A221C" stroke="#D4953F" stroke-width="2" />
+                    <circle cx="54" cy="26" r="6" fill="#EBB45F" />
+                    <path d="M54 26 L46 118 L24 146" stroke="#D8C4A0" stroke-width="4.2" stroke-linecap="round" stroke-linejoin="round" />
+                    <rect x="14" y="140" width="16" height="24" rx="3" transform="rotate(34 22 152)" fill="#B93627" stroke="#EBB45F" stroke-width="1.5" />
+                  </svg>
+                </div>
+
+                <div class="turntable-track-info">
+                  <div class="turntable-title" id="turntableTitle">Cargando sesión...</div>
+                  <div class="turntable-artist" id="turntableArtist">Aguja Roja</div>
+                  <p class="turntable-notes" id="turntableNotes"></p>
+                </div>
+
+                <div class="turntable-cover-actions editor-only">
+                  <button type="button" class="btn btn-ghost btn-sm" id="regenActiveCoverVintageBtn" title="Generar nueva carátula vintage en lienzo local">
+                    Arte Vintage
+                  </button>
+                  <button type="button" class="btn btn-ghost btn-sm" id="regenActiveCoverHfBtn" title="Generar portada con IA gratuita de Hugging Face">
+                    Portada IA (HF)
+                  </button>
+                </div>
+              </div>
+
+              <!-- RIGHT: TRANSPORT, PHYSICAL A/B SWITCH, WAVEFORM & METERS -->
+              <div class="console-controls-area">
+                <div class="ab-switch-row">
+                  <div class="transport-cluster">
+                    <button type="button" class="transport-icon-btn" id="prevTrackBtn" aria-label="Pista anterior" title="Pista anterior">
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+                        <path d="M19 20 9 12l10-8v16ZM5 19V5" />
+                      </svg>
+                    </button>
+
+                    <button type="button" class="play-btn" id="playPauseBtn" aria-label="Reproducir comparación A/B" title="Reproducir / Pausar (Espacio)">
+                      <svg id="playIcon" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M7 5.2v13.6L19 12 7 5.2Z" />
+                      </svg>
+                      <svg id="pauseIcon" viewBox="0 0 24 24" fill="currentColor" style="display:none;">
+                        <rect x="6" y="5" width="4.5" height="14" rx="1" />
+                        <rect x="13.5" y="5" width="4.5" height="14" rx="1" />
+                      </svg>
+                    </button>
+
+                    <button type="button" class="transport-icon-btn" id="rewindBtn" aria-label="Volver al inicio" title="Volver al inicio">
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+                        <path d="M3 12a9 9 0 1 0 3-6.7L3 8" />
+                        <path d="M3 3v5h5" />
+                      </svg>
+                    </button>
+
+                    <button type="button" class="transport-icon-btn" id="nextTrackBtn" aria-label="Siguiente pista" title="Siguiente pista">
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+                        <path d="m5 4 10 8-10 8V4ZM19 5v14" />
+                      </svg>
+                    </button>
+                  </div>
+
+                  <!-- HERO PHYSICAL A/B SWITCH (adapts labels for Master / Mix, or hides for single-file Beat) -->
+                  <div class="ab-hardware-switch" id="abSwitchGroup" role="group" aria-label="Selector instantáneo entre Versión A y Versión B">
+                    <button type="button" class="ab-side-btn" id="switchMixBtn" data-version="mix" aria-pressed="false" title="Escuchar Versión A (Tecla T)">
+                      <span class="lamp-dot" aria-hidden="true"></span>
+                      <span id="switchALabel">MIX (Antes)</span>
+                    </button>
+                    <button type="button" class="ab-side-btn is-active" id="switchMasterBtn" data-version="master" aria-pressed="true" title="Escuchar Versión B (Tecla T)">
+                      <span class="lamp-dot" aria-hidden="true"></span>
+                      <span id="switchBLabel">MÁSTER (Después)</span>
+                    </button>
+                  </div>
+                  <div class="single-track-badge" id="singleTrackBanner" hidden>
+                    <span class="lamp-dot" style="background:var(--brass-bright);" aria-hidden="true"></span>
+                    <span id="singleTrackLabel">BEAT / PRODUCCIÓN · WAV LOSSLESS</span>
+                  </div>
+
+                  <!-- Loudness Match + Volume -->
+                  <div class="loudness-cluster">
+                    <button
+                      type="button"
+                      class="match-toggle-btn is-active"
+                      id="loudnessMatchBtn"
+                      aria-pressed="true"
+                      title="Iguala automáticamente los LUFS entre Mix y Máster (Tecla L)"
+                    >
+                      <span class="match-led" aria-hidden="true"></span>
+                      <span id="loudnessMatchLabel">Loudness Match: ON</span>
+                    </button>
+
+                    <label class="volume-control" title="Volumen de monitoreo">
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
+                        <path d="M11 5 6 9H2v6h4l5 4V5Z" />
+                        <path d="M15.5 8.5a5 5 0 0 1 0 7M19 5a9.5 9.5 0 0 1 0 14" />
+                      </svg>
+                      <span class="sr-only">Volumen</span>
+                      <input type="range" class="volume-slider" id="volumeSlider" min="0" max="1" step="0.01" value="0.88" />
+                    </label>
+                  </div>
+                </div>
+
+                <!-- INTERACTIVE WAVEFORM + A-B SECTION LOOP -->
+                <div class="waveform-panel">
+                  <div class="waveform-canvas-wrap" id="waveformWrap" title="Haz clic o arrastra para saltar a cualquier segundo">
+                    <canvas id="waveformCanvas" aria-label="Forma de onda interactiva"></canvas>
+                  </div>
+
+                  <div class="waveform-footer">
+                    <div class="time-display tabular-nums">
+                      <strong id="timeCurrent">00:00.0</strong>
+                      <span>/</span>
+                      <span id="timeTotal">00:00.0</span>
+                    </div>
+
+                    <div class="ab-loop-controls" role="group" aria-label="Controles de bucle A-B">
+                      <span class="spec-chip tabular-nums" id="loopRangeLabel">Loop A-B libre</span>
+                      <button type="button" class="loop-chip-btn" id="setLoopABtn" title="Marcar punto A en el cabezal (Tecla [)">Marcar A</button>
+                      <button type="button" class="loop-chip-btn" id="setLoopBBtn" title="Marcar punto B y activar loop (Tecla ])">Marcar B</button>
+                      <button type="button" class="loop-chip-btn" id="loopToggleBtn" aria-pressed="false" title="Activar o pausar Loop A-B">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
+                          <path d="m17 2 4 4-4 4" />
+                          <path d="M3 11v-1a4 4 0 0 1 4-4h14" />
+                          <path d="m7 22-4-4 4-4" />
+                          <path d="M21 13v1a4 4 0 0 1-4 4H3" />
+                        </svg>
+                        Loop
+                      </button>
+                      <button type="button" class="loop-chip-btn" id="clearLoopBtn" title="Limpiar sección A-B">Limpiar</button>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- ANALOG VU METERS + PRECISION LUFS & SPECTRUM RACK -->
+                <div class="metering-deck">
+                  <div class="vu-meter-box">
+                    <div class="vu-header">
+                      <span>Estéreo Analógico</span>
+                      <span class="tabular-nums">0 VU = -14 dBFS</span>
+                    </div>
+                    <canvas id="vuCanvas" aria-label="Medidores VU analógicos izquierdo y derecho"></canvas>
+                  </div>
+
+                  <div class="digital-meters-panel">
+                    <div class="telemetry-strip">
+                      <div class="meter-readout">
+                        <span class="meter-label">Momentáneo</span>
+                        <span class="meter-value tabular-nums" id="meterMomentary">--.- LUFS</span>
+                        <span class="meter-sub">Ventana 400 ms</span>
+                      </div>
+                      <div class="meter-readout">
+                        <span class="meter-label">Corto Plazo</span>
+                        <span class="meter-value tabular-nums" id="meterShortTerm">--.- LUFS</span>
+                        <span class="meter-sub">Ventana 3.0 s</span>
+                      </div>
+                      <div class="meter-readout">
+                        <span class="meter-label">Integrado</span>
+                        <span class="meter-value is-brass tabular-nums" id="meterIntegrated">--.- LUFS</span>
+                        <span class="meter-sub" id="meterIntegratedSub">BS.1770-4</span>
+                      </div>
+                      <div class="meter-readout">
+                        <span class="meter-label">Pico dBFS</span>
+                        <span class="meter-value tabular-nums" id="meterPeak">--.- dBFS</span>
+                        <span class="meter-sub">Peak Hold</span>
+                      </div>
+                    </div>
+                    <canvas id="spectrumCanvas" aria-label="Analizador de espectro en tiempo real"></canvas>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- ==============================================================
+                 PANEL PRO (MINIMETERS SUITE): 20Hz-20kHz SPECTROGRAM,
+                 CORRELATION, VECTORSCOPE, OSCILLOSCOPE & MONO/MID/SIDE MATRIX
+                 ============================================================== -->
+            <div class="pro-meters-rack" id="proMetersRack">
+              <div class="pro-rack-header">
+                <div class="pro-rack-title">
+                  <span class="pro-badge">PRO ANALYZER</span>
+                  Suite de Medición en Tiempo Real (20 Hz – 20,000 Hz)
+                </div>
+
+                <div style="display:flex; flex-wrap:wrap; align-items:center; gap:0.65rem;">
+                  <div class="monitor-matrix" role="group" aria-label="Matriz de monitoreo Estéreo, Mono, Mid y Side">
+                    <span class="matrix-label">Escucha</span>
+                    <button type="button" class="matrix-btn is-active" data-monitor-mode="stereo">Estéreo</button>
+                    <button type="button" class="matrix-btn" data-monitor-mode="mono">Mono</button>
+                    <button type="button" class="matrix-btn" data-monitor-mode="mid">Mid</button>
+                    <button type="button" class="matrix-btn" data-monitor-mode="side">Side</button>
+                  </div>
+                  <button type="button" class="loop-chip-btn" id="clearSpectrogramBtn" title="Limpiar historial del espectrograma">
+                    Limpiar historial
+                  </button>
+                </div>
+              </div>
+
+              <!-- Row 1: Wide 20Hz-20kHz Waterfall Spectrogram + Lissajous Vectorscope -->
+              <div class="pro-grid-top">
+                <div class="pro-module">
+                  <div class="pro-module-head">
+                    <strong>Espectrograma Logarítmico · 20 Hz – 20,000 Hz</strong>
+                    <span class="tabular-nums">Línea vertical = cambio Mix/Máster</span>
+                  </div>
+                  <canvas id="spectrogramCanvas" aria-label="Espectrograma en vivo de 20 a 20,000 Hz"></canvas>
+                </div>
+
+                <div class="pro-module">
+                  <div class="pro-module-head">
+                    <strong>Vectorscopio L/R</strong>
+                    <span class="tabular-nums">Lissajous M/S</span>
+                  </div>
+                  <canvas id="vectorscopeCanvas" aria-label="Vectorscopio estéreo Lissajous"></canvas>
+                </div>
+              </div>
+
+              <!-- Row 2: Stereo Correlation + Live Oscilloscope + Mid/Side & Crest -->
+              <div class="pro-grid-bottom">
+                <div class="pro-module">
+                  <div class="pro-module-head">
+                    <strong>Correlación Estéreo (Fase)</strong>
+                    <span class="tabular-nums" id="proCorrValue">+0.00</span>
+                  </div>
+                  <canvas id="correlationCanvas" aria-label="Medidor de correlación estéreo de -1 a +1"></canvas>
+                  <div class="corr-status-row">
+                    <span style="color:var(--text-muted); font-size:0.74rem;">Compatibilidad mono / vinilo</span>
+                    <span class="corr-status-pill" id="proCorrBadge">Sin señal</span>
+                  </div>
+                </div>
+
+                <div class="pro-module">
+                  <div class="pro-module-head">
+                    <strong>Osciloscopio de Transientes</strong>
+                    <span class="tabular-nums">L / R en vivo</span>
+                  </div>
+                  <canvas id="oscilloscopeCanvas" aria-label="Osciloscopio de forma de onda en vivo"></canvas>
+                </div>
+
+                <div class="pro-module">
+                  <div class="pro-module-head">
+                    <strong>Imagen Mid/Side y Dinámica</strong>
+                    <span class="tabular-nums" id="proBalanceVal">Bal: Centro</span>
+                  </div>
+                  <div class="ms-metrics-list">
+                    <div class="ms-bar-row">
+                      <span class="tabular-nums">MID</span>
+                      <div class="ms-bar-track"><div class="ms-bar-fill" id="proMidBar"></div></div>
+                      <span class="tabular-nums" id="proMidVal">-72 dB</span>
+                    </div>
+                    <div class="ms-bar-row">
+                      <span class="tabular-nums">SIDE</span>
+                      <div class="ms-bar-track"><div class="ms-bar-fill is-side" id="proSideBar"></div></div>
+                      <span class="tabular-nums" id="proSideVal">-72 dB</span>
+                    </div>
+                    <div class="ms-bar-row">
+                      <span class="tabular-nums">CREST</span>
+                      <div class="ms-bar-track"><div class="ms-bar-fill is-crest" id="proCrestBar"></div></div>
+                      <span class="tabular-nums" id="proCrestVal">0.0 dB</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- CASSETTE TAPE LIBRARY / PLAYLIST -->
+            <div class="cassette-bay">
+              <div class="bay-header">
+                <div class="bay-title">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true">
+                    <rect x="2" y="5" width="20" height="14" rx="2" />
+                    <circle cx="8" cy="12" r="2.2" />
+                    <circle cx="16" cy="12" r="2.2" />
+                    <path d="M8 14.2h8M6 19l1.5-3h9L18 19" />
+                  </svg>
+                  Cintas de Portafolio (Antes / Después)
+                </div>
+
+                <div class="bay-actions editor-only">
+                  <button type="button" class="btn btn-ghost btn-sm" id="loadDemoBtn">
+                    + Cargar Demo .WAV
+                  </button>
+                  <a href="#uploadDrawer" class="btn btn-brass btn-sm">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
+                      <path d="M12 16V4m0 0-4 4m4-4 4 4M4 17v2a1 1 0 0 0 1 1h14a1 1 0 0 0 1-1v-2" />
+                    </svg>
+                    Subir .WAV Local
+                  </a>
+                </div>
+              </div>
+
+              <div class="track-list" id="trackList"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ================================================================
+             EDITOR MODE: LOCAL .WAV UPLOADER & HUGGING FACE COVER ART STUDIO
+             ================================================================ -->
+        <div class="upload-drawer editor-only" id="uploadDrawer">
+          <div class="drawer-header">
+            <div>
+              <h2>Subir nueva comparación .WAV desde tu computadora</h2>
+              <p style="font-size:0.86rem; color:var(--text-secondary); margin-top:0.25rem;">
+                Selecciona tu mezcla original y tu máster final desde tus carpetas locales. Se guardan sin compresión en IndexedDB y calculan LUFS automáticamente.
+              </p>
+            </div>
+          </div>
+
+          <form id="uploadTrackForm">
+            <!-- 3-MODE CREATOR SELECTOR: MASTERING / MIXING / BEAT -->
+            <div class="track-mode-selector" role="radiogroup" aria-label="Tipo de obra a subir">
+              <button type="button" class="track-mode-pill is-active" id="uploadModeMaster" data-upload-mode="master">
+                <strong>Mastering (Mix ↔ Máster)</strong>
+                <span>2 archivos .WAV · Comparación A/B + LUFS</span>
+              </button>
+              <button type="button" class="track-mode-pill" id="uploadModeMix" data-upload-mode="mix">
+                <strong>Mezcla (Original ↔ Mix)</strong>
+                <span>2 archivos .WAV · Grabación cruda vs. Mix</span>
+              </button>
+              <button type="button" class="track-mode-pill" id="uploadModeBeat" data-upload-mode="beat">
+                <strong>Beat / Producción (1 .WAV)</strong>
+                <span>1 archivo .WAV · Vitrina directa + BPM/Key</span>
+              </button>
+            </div>
+
+            <div class="upload-drop-grid" id="uploadDropGrid">
+              <label class="wav-dropzone" id="mixDropzone">
+                <input type="file" id="mixFileInput" accept=".wav,audio/wav,audio/x-wav,audio/*" />
+                <span class="dropzone-badge is-mix" id="dropBadgeA">VERSIÓN A · MIX</span>
+                <div class="dropzone-title" id="dropTitleA">Archivo de Mezcla Original (.wav)</div>
+                <div class="dropzone-file" id="mixFileLabel">Arrastra tu archivo A .wav o haz clic para explorar</div>
+              </label>
+
+              <label class="wav-dropzone" id="masterDropzone">
+                <input type="file" id="masterFileInput" accept=".wav,audio/wav,audio/x-wav,audio/*" />
+                <span class="dropzone-badge is-master" id="dropBadgeB">VERSIÓN B · MÁSTER</span>
+                <div class="dropzone-title" id="dropTitleB">Archivo de Máster Final (.wav)</div>
+                <div class="dropzone-file" id="masterFileLabel">Arrastra tu archivo B .wav o haz clic para explorar</div>
+              </label>
+            </div>
+
+            <div class="form-row-2">
+              <div class="field"><label for="uploadTitle">Título de la canción o beat</label><input id="uploadTitle" type="text" placeholder="Ej. Terciopelo en Sol Menor" required /></div>
+              <div class="field"><label for="uploadArtist">Artista / Banda / Productor</label><input id="uploadArtist" type="text" placeholder="Ej. Cuarteto del Sur" required /></div>
+            </div>
+
+            <div class="form-row-2" style="margin-top:0.85rem;">
+              <div class="field"><label for="uploadGenre">Género / Estilo</label><input id="uploadGenre" type="text" placeholder="Ej. Boom Bap, Indie, Jazz, Electrónica" /></div>
+              <div class="form-row-2" style="gap:0.65rem;">
+                <div class="field"><label for="uploadBpm">BPM (opcional)</label><input id="uploadBpm" type="number" min="40" max="260" placeholder="Ej. 92" /></div>
+                <div class="field"><label for="uploadKey">Tonalidad (opcional)</label><input id="uploadKey" type="text" placeholder="Ej. Dm / F#m" /></div>
+              </div>
+            </div>
+
+            <div class="field" style="margin-top:0.85rem;">
+              <label for="uploadNotes">Notas técnicas / Cadena analógica o producción</label>
+              <input id="uploadNotes" type="text" placeholder="Ej. EQ Pultec + Compresión Vari-Mu, o samplers y sintetizadores usados" />
+            </div>
+
+            <!-- COVER ART & HUGGING FACE FREE MODELS STUDIO -->
+            <div class="cover-studio-box">
+              <div class="cover-preview-square">
+                <img id="uploadCoverPreview" src="" alt="Vista previa de carátula del vinilo" />
+              </div>
+
+              <div class="hf-controls-grid">
+                <div style="font-weight:600; font-size:0.9rem; color:var(--parchment-light);">
+                  Carátula del Vinilo (Portada automática gratuita con Hugging Face o Arte Vintage local)
+                </div>
+
+                <div class="hf-row">
+                  <select id="hfModelSelect" aria-label="Modelo gratuito de Hugging Face" style="flex:1 1 240px;"></select>
+                  <input
+                    id="hfTokenInput"
+                    type="password"
+                    placeholder="Token gratuito HF (hf_...) — solo se guarda en tu navegador"
+                    style="flex:1 1 230px;"
+                    autocomplete="off"
+                  />
+                </div>
+
+                <div class="hf-row">
+                  <input
+                    id="hfMoodPrompt"
+                    type="text"
+                    placeholder="Opcional: describe la escena de la portada (ej. estudio cálido con saxofón y lluvia nocturna)"
+                    style="flex:1 1 260px;"
+                  />
+                  <button type="button" class="btn btn-brass btn-sm" id="hfGenerateBtn">
+                    Generar con IA (HF)
+                  </button>
+                  <button type="button" class="btn btn-ghost btn-sm" id="randomVintageCoverBtn">
+                    Arte Vintage Local
+                  </button>
+                  <label class="btn btn-ghost btn-sm" style="cursor:pointer;">
+                    Subir imagen
+                    <input type="file" id="customCoverInput" accept="image/*" hidden />
+                  </label>
+                </div>
+
+                <div class="hf-status-line" id="hfStatusLine">
+                  Si no ingresas token de Hugging Face, se genera automáticamente una portada estilo vinilo mid-century sin conexión.
+                </div>
+              </div>
+            </div>
+
+            <div style="display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:1rem; margin-top:1.15rem;">
+              <div class="upload-progress" id="uploadProgress"></div>
+              <button type="submit" class="btn btn-brass" id="saveTrackBtn">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" aria-hidden="true">
+                  <path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2Z" />
+                  <path d="M17 21v-8H7v8M7 3v5h8" />
+                </svg>
+                Guardar Track en Portafolio
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </section>
+
+    <!-- ====================================================================
+         PUBLIC PRODUCER PROFILE / ABOUT SECTION (CUSTOMIZABLE PER ACCOUNT)
+         ==================================================================== -->
+    <section class="portfolio-section" id="sobre-mi">
+      <div class="container">
+        <div style="display:flex; flex-wrap:wrap; align-items:baseline; justify-content:space-between; gap:1rem; margin-bottom:1.25rem;">
+          <h2 class="section-heading" style="margin-bottom:0;">Perfil del Productor y la Sala</h2>
+          <div style="display:flex; flex-wrap:wrap; gap:0.5rem;">
+            <button type="button" class="btn btn-ghost btn-sm" id="copyPublicLinkBtn">
+              Copiar enlace público (?u=)
+            </button>
+            <button type="button" class="btn btn-ghost btn-sm editor-only" id="editPublicProfileBtn">
+              Personalizar foto y perfil público
+            </button>
+          </div>
+        </div>
+
+        <div class="bio-grid">
+          <div>
+            <!-- Producer Portrait + Handle + Role -->
+            <div class="producer-identity-card">
+              <div class="producer-portrait-frame">
+                <img id="publicProfileAvatar" src="" alt="Foto de perfil del productor" />
+              </div>
+              <div class="producer-identity-meta">
+                <div class="producer-name-row">
+                  <h3 id="publicProfileName">Ingeniero de Máster</h3>
+                  <span class="producer-handle" id="publicProfileHandle">@agujaroja</span>
+                </div>
+                <div class="producer-role-text" id="publicProfileRole">Mastering Analógico & Productor</div>
+                <div class="specialties-row" id="publicSpecialtiesList"></div>
+              </div>
+            </div>
+
+            <div class="bio-copy">
+              <p id="bioPara1">
+                Cada disco merece una traducción honesta, profunda y emotiva en cualquier sistema: desde un tornamesa de alta fidelidad hasta plataformas de streaming y clubes.
+              </p>
+              <p id="bioPara2">
+                Combino conversión de referencia, ecualización y compresión analógica híbrida y monitoreo calibrado para darle a cada obra dimensión, balance tonal y pegada sin sacrificar su respiración musical.
+              </p>
+            </div>
+
+            <div class="socials-row" id="publicSocialLinks"></div>
+          </div>
+
+          <aside class="studio-plaque" aria-label="Especificaciones de sesión">
+            <h3>Ficha de Sesión</h3>
+            <ul class="plaque-list">
+              <li>
+                <span class="plaque-label">Ubicación</span>
+                <span class="plaque-value" id="plaqueLocation">Ciudad de México · Sesiones Remotas</span>
+              </li>
+              <li>
+                <span class="plaque-label">Entrega estándar</span>
+                <span class="plaque-value" id="plaqueTurnaround">24 – 48 horas hábiles</span>
+              </li>
+              <li>
+                <span class="plaque-label">Revisiones</span>
+                <span class="plaque-value" id="plaqueRevisions">Hasta 2 rondas de ajuste incluidas</span>
+              </li>
+              <li>
+                <span class="plaque-label">Formatos de entrega</span>
+                <span class="plaque-value tabular-nums">WAV 24-bit · 16-bit · DDP · Vinilo</span>
+              </li>
+            </ul>
+          </aside>
+        </div>
+      </div>
+    </section>
+
+    <!-- ====================================================================
+         SERVICES & RATES LEDGER
+         ==================================================================== -->
+    <section class="portfolio-section" id="servicios">
+      <div class="container">
+        <h2 class="section-heading">Servicios de Mastering</h2>
+        <p class="section-intro">
+          Procesamiento dedicado canción por canción con escucha crítica, metadatos ISRC y control estricto de picos reales (True Peak).
+        </p>
+
+        <div class="services-ledger">
+          <article class="service-row">
+            <div>
+              <h3 class="service-name">Mastering Estéreo</h3>
+              <span class="service-deliverables">WAV 24-bit + 16-bit + MP3 320 · Streaming Ready</span>
+            </div>
+            <p class="service-desc">
+              A partir de tu mezcla estéreo final en .WAV (sin limitador en el bus máster). Balance espectral, imagen estéreo, cohesión analógica y sonoridad óptima para Spotify, Apple Music y YouTube.
+            </p>
+            <div class="service-rate tabular-nums">Cotización a medida</div>
+          </article>
+
+          <article class="service-row">
+            <div>
+              <h3 class="service-name">Stem Mastering</h3>
+              <span class="service-deliverables">Hasta 8 stems estéreo · Mayor control quirúrgico</span>
+            </div>
+            <p class="service-desc">
+              Ideal cuando buscas esculpir por separado baterías, bajo, voces e instrumentos antes del bus final analógico, logrando máxima claridad y pegada sin perder el carácter de la mezcla.
+            </p>
+            <div class="service-rate tabular-nums">Cotización a medida</div>
+          </article>
+
+          <article class="service-row">
+            <div>
+              <h3 class="service-name">Pre-Máster para Vinilo y Cassette</h3>
+              <span class="service-deliverables">Secuenciado Cara A / Cara B · Control de fase en graves</span>
+            </div>
+            <p class="service-desc">
+              Preparación dedicada para corte en laca y duplicación en cinta magnética: suma mono controlada en subgraves, de-essing analógico suave y hoja de tiempos lista para planta de prensado.
+            </p>
+            <div class="service-rate tabular-nums">Cotización a medida</div>
+          </article>
+
+          <article class="service-row">
+            <div>
+              <h3 class="service-name">Álbum Completo & Secuenciado DDP</h3>
+              <span class="service-deliverables">8+ canciones · Coherencia sonora de principio a fin</span>
+            </div>
+            <p class="service-desc">
+              Diseño del arco sonoro y silencios entre canciones para que el álbum respire como una obra completa, incluyendo imagen DDP verificada, códigos ISRC y versiones instrumentales.
+            </p>
+            <div class="service-rate tabular-nums">Paquete a medida</div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ====================================================================
+         STUDIO GEAR / ANALOG OUTBOARD RACK
+         ==================================================================== -->
+    <section class="portfolio-section" id="equipo">
+      <div class="container">
+        <h2 class="section-heading">Estudio y Cadena Analógica</h2>
+        <p class="section-intro">
+          Herramientas clásicas de tubos, transformadores y conversión transparente seleccionadas por musicalidad y precisión.
+        </p>
+
+        <div class="gear-rack">
+          <div class="gear-group">
+            <h3>Conversión y Monitoreo</h3>
+            <ul class="gear-list">
+              <li>Conversores AD/DA de Mastering <span>32-bit / 192 kHz</span></li>
+              <li>Monitores de Rango Completo <span>Respuesta calibrada en sala</span></li>
+              <li>Controlador Pasivo con Atenuación por Pasos <span>Exactitud 0.1 dB</span></li>
+              <li>Audífonos Abiertos Planar-Magnéticos <span>Referencia de detalle</span></li>
+            </ul>
+          </div>
+
+          <div class="gear-group">
+            <h3>Ecualización y Dinámica Outboard</h3>
+            <ul class="gear-list">
+              <li>Ecualizador Pasivo de Tubos (Estilo Pultec) <span>Graves sedosos y aire</span></li>
+              <li>Ecualizador Paramétrico de Mastering M/S <span>Esculpido quirúrgico</span></li>
+              <li>Compresor Vari-Mu Estéreo <span>Cohesión y densidad armónica</span></li>
+              <li>Grabadora de Cinta / Saturación de Transformador <span>Color vintage controlado</span></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ====================================================================
+         CONTACT & BOOKING SECTION
+         ==================================================================== -->
+    <section class="portfolio-section" id="contacto">
+      <div class="container">
+        <h2 class="section-heading">Agenda tu sesión en Aguja Roja</h2>
+        <p class="section-intro">
+          Cuéntame sobre tu sencillo, EP o álbum. Si deseas, puedes solicitar una muestra de prueba antes de confirmar tu proyecto.
+        </p>
+
+        <div class="contact-grid">
+          <div class="contact-details">
+            <div class="contact-item">
+              <span class="contact-label">Correo directo</span>
+              <a class="contact-value" id="contactEmailDisplay" href="mailto:contacto@agujaroja.audio">
+                contacto@agujaroja.audio
+              </a>
+            </div>
+            <div class="contact-item">
+              <span class="contact-label">Estudio</span>
+              <span class="contact-value" id="contactLocationDisplay">Ciudad de México · Sesiones Remotas Globales</span>
+            </div>
+            <div class="contact-item">
+              <span class="contact-label">Checklist rápido para enviar tu Mix</span>
+              <p style="color:var(--text-secondary); font-size:0.92rem; margin-top:0.25rem;">
+                Exporta tu mezcla en <strong>.WAV 24-bit</strong> a la frecuencia nativa de tu proyecto (44.1 / 48 / 96 kHz), deja entre <strong>-6 y -3 dBFS</strong> de headroom y desactiva el limitador del canal máster.
+              </p>
+            </div>
+          </div>
+
+          <form class="vintage-form" id="contactForm">
+            <div class="form-row-2">
+              <div class="field">
+                <label for="contactName">Tu nombre o proyecto</label>
+                <input id="contactName" type="text" placeholder="Ej. Sofía Vega / Proyecto Sur" required />
+              </div>
+              <div class="field">
+                <label for="contactEmail">Correo electrónico</label>
+                <input id="contactEmail" type="email" placeholder="tu@correo.com" required />
+              </div>
+            </div>
+
+            <div class="form-row-2">
+              <div class="field">
+                <label for="contactService">Servicio</label>
+                <select id="contactService">
+                  <option value="Mastering Estéreo">Mastering Estéreo</option>
+                  <option value="Stem Mastering">Stem Mastering</option>
+                  <option value="Pre-Máster Vinilo / Cassette">Pre-Máster Vinilo / Cassette</option>
+                  <option value="Álbum Completo / DDP">Álbum Completo / DDP</option>
+                </select>
+              </div>
+              <div class="field">
+                <label for="contactTracks">Cantidad de canciones</label>
+                <input id="contactTracks" type="number" min="1" max="50" value="1" />
+              </div>
+            </div>
+
+            <div class="field">
+              <label for="contactMessage">Referencias sonoras y fecha estimada de lanzamiento</label>
+              <textarea
+                id="contactMessage"
+                rows="4"
+                placeholder="Cuéntame sobre el sonido que buscas, referencias de discos y enlace temporal si ya tienes la mezcla lista..."
+                required
+              ></textarea>
+            </div>
+
+            <div style="display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:1rem;">
+              <div class="form-feedback" id="contactFeedback" aria-live="polite"></div>
+              <button type="submit" class="btn btn-brass">Enviar solicitud</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <div id="footerStudioName">Aguja Roja — Ingeniero de Máster</div>
+      <div class="shortcut-hints" aria-label="Atajos de teclado de la consola">
+        <span><kbd>Espacio</kbd> Play/Pausa</span>
+        <span><kbd>T</kbd> Toggle Mix/Máster</span>
+        <span><kbd>L</kbd> Loudness Match</span>
+        <span><kbd>P</kbd> Panel Pro</span>
+        <span><kbd>[</kbd> / <kbd>]</kbd> Loop A-B</span>
+      </div>
+    </div>
+  </footer>
+
+  <div class="toast-region" id="toastRegion" aria-live="polite" aria-atomic="true"></div>
+
+  <script type="module" src="js/app.js"></script>
+</body>
+</html>

@@ -1,0 +1,911 @@
+/* ==========================================================================
+   VINTAGE ANALOG MASTERING CONSOLE — TURNTABLE, A/B SWITCH, WAVEFORM, METERS
+   ========================================================================== */
+
+/* Outer Walnut Cabinet */
+.mastering-console {
+  border-radius: var(--radius-xl);
+  padding: 14px;
+  border: 1px solid var(--wood-trim);
+  box-shadow: var(--shadow-cabinet);
+  position: relative;
+}
+
+/* Subtle brass corner screws on cabinet */
+.cabinet-screw {
+  position: absolute;
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 35%, #f0c97e, #8a5e22 72%, #3a240a);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.75);
+  pointer-events: none;
+}
+
+.cabinet-screw.tl { top: 8px; left: 8px; }
+.cabinet-screw.tr { top: 8px; right: 8px; }
+.cabinet-screw.bl { bottom: 8px; left: 8px; }
+.cabinet-screw.br { bottom: 8px; right: 8px; }
+
+/* Inner Anodized Metal Faceplate */
+.console-faceplate {
+  background: linear-gradient(180deg, #1d1916 0%, #14110f 100%);
+  border: 1px solid rgba(240, 212, 168, 0.14);
+  border-radius: calc(var(--radius-xl) - 6px);
+  overflow: hidden;
+}
+
+/* Console Top Status Strip */
+.console-top-bar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem 1.25rem;
+  padding: 0.85rem 1.4rem;
+  background: var(--panel-inset);
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+.track-format-specs {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.65rem;
+  font-size: 0.76rem;
+  color: var(--text-secondary);
+}
+
+.spec-chip {
+  font-family: var(--font-mono);
+  background: var(--panel-elevated);
+  border: 1px solid var(--border-subtle);
+  padding: 0.22rem 0.55rem;
+  border-radius: var(--radius-sm);
+  color: var(--parchment-mid);
+}
+
+.spec-chip.is-lossless {
+  border-color: var(--border-brass);
+  color: var(--brass-bright);
+}
+
+.spec-chip.is-cloud {
+  border-color: var(--sage-bright);
+  color: var(--sage-bright);
+  background: rgba(115, 148, 96, 0.14);
+}
+
+.single-track-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  padding: 0.6rem 1.15rem;
+  border-radius: 999px;
+  border: 1px solid var(--border-brass);
+  background: linear-gradient(180deg, rgba(212, 149, 63, 0.22), rgba(35, 25, 18, 0.9));
+  color: var(--brass-bright);
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.cassette-mode-tag {
+  font-family: var(--font-mono);
+  font-size: 0.66rem;
+  font-weight: 700;
+  padding: 0.12rem 0.42rem;
+  border-radius: var(--radius-sm);
+  text-transform: uppercase;
+  flex-shrink: 0;
+}
+
+.cassette-mode-tag.is-master {
+  background: rgba(212, 149, 63, 0.2);
+  color: var(--brass-bright);
+}
+
+.cassette-mode-tag.is-mix {
+  background: rgba(201, 88, 58, 0.22);
+  color: #f7ad99;
+}
+
+.cassette-mode-tag.is-beat {
+  background: rgba(115, 148, 96, 0.22);
+  color: var(--sage-bright);
+}
+
+.console-utility-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+/* Main Console Stage: Turntable Left + Controls/Waveform/Meters Right */
+.console-main-grid {
+  display: grid;
+  grid-template-columns: 310px minmax(0, 1fr);
+  gap: 1.75rem;
+  padding: clamp(1.25rem, 2.5vw, 1.85rem);
+  align-items: center;
+}
+
+/* ---- VINYL TURNTABLE PLATTER ---- */
+.turntable-deck {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  background: var(--panel-inset);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-lg);
+  padding: 1.35rem 1.15rem 1.2rem;
+  box-shadow: var(--shadow-inset);
+  position: relative;
+}
+
+.platter-stage {
+  position: relative;
+  width: 228px;
+  height: 228px;
+  display: grid;
+  place-items: center;
+}
+
+.platter-rim {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background: radial-gradient(circle, #2a2420 58%, #3c342e 68%, #181412 72%, #3a3129 98%);
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.75), inset 0 1px 2px rgba(255, 240, 210, 0.14);
+}
+
+.vinyl-disc {
+  position: relative;
+  width: 206px;
+  height: 206px;
+  border-radius: 50%;
+  background:
+    repeating-radial-gradient(
+      circle at center,
+      #100e0d 0px,
+      #100e0d 2px,
+      #1b1816 2.5px,
+      #110f0e 4px
+    );
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.8), inset 0 0 0 2px rgba(255, 240, 210, 0.06);
+  display: grid;
+  place-items: center;
+  animation: vinylSpin 7.5s linear infinite;
+  animation-play-state: paused;
+}
+
+.vinyl-disc.is-spinning {
+  animation-play-state: running;
+}
+
+/* Specular light sheen across vinyl grooves */
+.vinyl-disc::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background: conic-gradient(
+    from 30deg,
+    transparent 0deg,
+    rgba(255, 240, 216, 0.11) 28deg,
+    transparent 62deg,
+    transparent 185deg,
+    rgba(255, 240, 216, 0.08) 212deg,
+    transparent 246deg
+  );
+  pointer-events: none;
+}
+
+.vinyl-label {
+  width: 102px;
+  height: 102px;
+  border-radius: 50%;
+  overflow: hidden;
+  border: 2px solid rgba(212, 149, 63, 0.55);
+  background: var(--wood-walnut);
+  position: relative;
+  box-shadow: 0 0 0 4px #110f0e;
+}
+
+.vinyl-label img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.vinyl-spindle {
+  position: absolute;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 35%, #f5d896, #966624 70%, #2a1c0c);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.85);
+  z-index: 3;
+}
+
+/* Tonearm Pivot */
+.tonearm-svg {
+  position: absolute;
+  top: -8px;
+  right: -12px;
+  width: 82px;
+  height: 175px;
+  transform-origin: 54px 26px;
+  transform: rotate(-18deg);
+  transition: transform 620ms var(--ease-analog);
+  pointer-events: none;
+  z-index: 4;
+  filter: drop-shadow(0 6px 8px rgba(0, 0, 0, 0.65));
+}
+
+.turntable-deck.is-playing .tonearm-svg {
+  transform: rotate(7deg);
+}
+
+@keyframes vinylSpin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+.turntable-track-info {
+  text-align: center;
+  width: 100%;
+}
+
+.turntable-title {
+  font-family: var(--font-display);
+  font-size: 1.28rem;
+  color: var(--parchment-light);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.turntable-artist {
+  font-size: 0.86rem;
+  color: var(--text-secondary);
+  margin-top: 0.2rem;
+}
+
+.turntable-notes {
+  font-size: 0.78rem;
+  color: var(--text-muted);
+  margin-top: 0.45rem;
+  line-height: 1.4;
+}
+
+.turntable-cover-actions {
+  display: flex;
+  gap: 0.45rem;
+  justify-content: center;
+  width: 100%;
+}
+
+/* ---- RIGHT CONTROL SURFACE ---- */
+.console-controls-area {
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+  min-width: 0;
+}
+
+/* Centerpiece Mix <-> Master Hardware Switch Row */
+.ab-switch-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  background: var(--panel-elevated);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-lg);
+  padding: 0.9rem 1.15rem;
+  box-shadow: var(--shadow-panel);
+}
+
+/* Physical Play/Pause + Transport */
+.transport-cluster {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.play-btn {
+  width: 54px;
+  height: 54px;
+  border-radius: 50%;
+  border: 2px solid rgba(255, 240, 212, 0.35);
+  background: linear-gradient(180deg, var(--brass-bright) 0%, var(--brass) 100%);
+  color: var(--ink-espresso);
+  display: grid;
+  place-items: center;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.5), inset 0 2px 3px rgba(255, 250, 238, 0.45);
+  transition: transform 140ms var(--ease-analog), filter 160ms var(--ease-analog);
+}
+
+.play-btn:hover:not(:disabled) {
+  filter: brightness(1.07);
+}
+
+.play-btn:active:not(:disabled) {
+  transform: scale(0.96);
+}
+
+.play-btn svg {
+  width: 22px;
+  height: 22px;
+}
+
+.transport-icon-btn {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  border: 1px solid var(--border-subtle);
+  background: var(--panel-inset);
+  color: var(--text-secondary);
+  display: grid;
+  place-items: center;
+  transition: border-color 150ms, color 150ms, background 150ms;
+}
+
+.transport-icon-btn:hover:not(:disabled) {
+  border-color: var(--border-brass);
+  color: var(--parchment-light);
+}
+
+.transport-icon-btn svg {
+  width: 17px;
+  height: 17px;
+}
+
+/* THE HERO A/B HARDWARE ROCKER SWITCH (MIX <-> MASTER) */
+.ab-hardware-switch {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.8rem;
+  background: var(--panel-inset);
+  border: 1px solid var(--border-brass);
+  border-radius: 999px;
+  padding: 5px;
+  box-shadow: var(--shadow-inset);
+  position: relative;
+}
+
+.ab-side-btn {
+  position: relative;
+  z-index: 2;
+  border: none;
+  background: transparent;
+  padding: 0.62rem 1.25rem;
+  border-radius: 999px;
+  font-weight: 700;
+  font-size: 0.86rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  min-width: 132px;
+  justify-content: center;
+  transition: color 180ms var(--ease-analog), background 180ms var(--ease-analog), box-shadow 180ms var(--ease-analog);
+}
+
+.lamp-dot {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: #3a322c;
+  border: 1px solid rgba(0, 0, 0, 0.5);
+  transition: background 180ms, box-shadow 180ms;
+}
+
+.ab-side-btn[data-version="mix"].is-active {
+  background: linear-gradient(180deg, #d76a4a 0%, var(--oxblood) 100%);
+  color: #fff5ec;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 240, 230, 0.3);
+}
+
+.ab-side-btn[data-version="mix"].is-active .lamp-dot {
+  background: #ffd1be;
+  box-shadow: 0 0 8px #ff9c7a;
+}
+
+.ab-side-btn[data-version="master"].is-active {
+  background: linear-gradient(180deg, var(--brass-bright) 0%, var(--brass) 100%);
+  color: var(--ink-espresso);
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 248, 224, 0.45);
+}
+
+.ab-side-btn[data-version="master"].is-active .lamp-dot {
+  background: #231608;
+  box-shadow: 0 0 0 2px rgba(255, 248, 220, 0.45);
+}
+
+/* Loudness Match + Volume Cluster */
+.loudness-cluster {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+}
+
+.match-toggle-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.52rem 0.9rem;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border-subtle);
+  background: var(--panel-inset);
+  color: var(--text-secondary);
+  font-size: 0.8rem;
+  font-weight: 600;
+  transition: all 160ms var(--ease-analog);
+}
+
+.match-toggle-btn .match-led {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #3d352e;
+}
+
+.match-toggle-btn.is-active {
+  border-color: var(--sage-bright);
+  background: rgba(115, 148, 96, 0.16);
+  color: #dbeed0;
+}
+
+.match-toggle-btn.is-active .match-led {
+  background: var(--sage-bright);
+  box-shadow: 0 0 7px rgba(144, 181, 122, 0.8);
+}
+
+.volume-control {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  color: var(--text-secondary);
+}
+
+.volume-control svg {
+  width: 17px;
+  height: 17px;
+}
+
+.volume-slider {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 82px;
+  height: 5px;
+  border-radius: 999px;
+  background: var(--panel-inset);
+  border: 1px solid var(--border-subtle);
+}
+
+.volume-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 15px;
+  height: 15px;
+  border-radius: 50%;
+  background: linear-gradient(180deg, var(--brass-bright), var(--brass-dim));
+  border: 1px solid #f7deb0;
+  cursor: pointer;
+}
+
+/* ---- INTERACTIVE WAVEFORM + A-B LOOP DECK ---- */
+.waveform-panel {
+  background: var(--panel-inset);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-lg);
+  padding: 0.85rem 1rem 0.75rem;
+  box-shadow: var(--shadow-inset);
+}
+
+.waveform-canvas-wrap {
+  position: relative;
+  width: 100%;
+  height: 112px;
+  cursor: pointer;
+  touch-action: none;
+  user-select: none;
+}
+
+#waveformCanvas {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+.waveform-footer {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  margin-top: 0.65rem;
+  padding-top: 0.6rem;
+  border-top: 1px solid rgba(232, 207, 170, 0.08);
+}
+
+.time-display {
+  font-size: 0.82rem;
+  color: var(--parchment-light);
+}
+
+.time-display span {
+  color: var(--text-muted);
+}
+
+.ab-loop-controls {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  flex-wrap: wrap;
+}
+
+.loop-chip-btn {
+  border: 1px solid var(--border-subtle);
+  background: var(--panel-elevated);
+  color: var(--text-secondary);
+  font-family: var(--font-mono);
+  font-size: 0.74rem;
+  padding: 0.28rem 0.6rem;
+  border-radius: var(--radius-sm);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  transition: all 140ms;
+}
+
+.loop-chip-btn:hover:not(:disabled) {
+  border-color: var(--border-brass);
+  color: var(--parchment-light);
+}
+
+.loop-chip-btn.is-active {
+  background: rgba(212, 149, 63, 0.2);
+  border-color: var(--brass-bright);
+  color: var(--brass-bright);
+}
+
+.loop-chip-btn svg {
+  width: 13px;
+  height: 13px;
+}
+
+/* ---- ANALOG VU METERS + PRECISION MASTERING TELEMETRY + SPECTRUM ---- */
+.metering-deck {
+  display: grid;
+  grid-template-columns: 248px minmax(0, 1fr);
+  gap: 1rem;
+  align-items: stretch;
+}
+
+.vu-meter-box {
+  background: linear-gradient(180deg, #27211c 0%, #171310 100%);
+  border: 1px solid var(--border-brass);
+  border-radius: var(--radius-md);
+  padding: 0.6rem;
+  box-shadow: var(--shadow-panel);
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.vu-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.7rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-secondary);
+  padding-inline: 0.2rem;
+}
+
+#vuCanvas {
+  width: 100%;
+  height: 102px;
+  border-radius: 4px;
+  display: block;
+}
+
+.digital-meters-panel {
+  background: var(--panel-inset);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  padding: 0.7rem 0.9rem;
+  box-shadow: var(--shadow-inset);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 0.65rem;
+}
+
+.telemetry-strip {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 0.65rem;
+}
+
+.meter-readout {
+  display: flex;
+  flex-direction: column;
+  gap: 0.12rem;
+}
+
+.meter-label {
+  font-size: 0.68rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--text-muted);
+}
+
+.meter-value {
+  font-size: 0.96rem;
+  font-weight: 600;
+  color: var(--parchment-light);
+}
+
+.meter-value.is-brass {
+  color: var(--brass-bright);
+}
+
+.meter-value.is-clip {
+  color: var(--oxblood-bright);
+}
+
+.meter-sub {
+  font-size: 0.69rem;
+  color: var(--text-muted);
+}
+
+#spectrumCanvas {
+  width: 100%;
+  height: 62px;
+  display: block;
+  border-radius: 4px;
+}
+
+/* ---- CASSETTE TAPE LIBRARY / TRACKLIST ---- */
+.cassette-bay {
+  border-top: 1px solid var(--border-subtle);
+  background: rgba(12, 9, 7, 0.72);
+  padding: 1.25rem clamp(1.25rem, 2.5vw, 1.85rem) 1.5rem;
+}
+
+.bay-header {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.85rem;
+  margin-bottom: 1rem;
+}
+
+.bay-title {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  font-family: var(--font-display);
+  font-size: 1.2rem;
+  color: var(--parchment-light);
+}
+
+.bay-title svg {
+  width: 20px;
+  height: 20px;
+  color: var(--brass);
+}
+
+.bay-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.55rem;
+  flex-wrap: wrap;
+}
+
+.track-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+/* Individual Cassette Spine Track Row */
+.cassette-row {
+  display: grid;
+  grid-template-columns: 46px minmax(0, 1.5fr) auto auto;
+  align-items: center;
+  gap: 0.95rem;
+  padding: 0.65rem 0.95rem;
+  background: var(--panel-dark);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  transition: border-color 160ms var(--ease-analog), background 160ms var(--ease-analog);
+}
+
+.cassette-row:hover {
+  border-color: var(--border-brass);
+  background: var(--panel-elevated);
+}
+
+.cassette-row.is-current {
+  border-color: var(--brass-bright);
+  background: linear-gradient(90deg, rgba(212, 149, 63, 0.14) 0%, rgba(35, 30, 26, 0.95) 100%);
+}
+
+.cassette-thumb {
+  width: 46px;
+  height: 46px;
+  border-radius: 5px;
+  overflow: hidden;
+  border: 1px solid rgba(232, 207, 170, 0.22);
+  background: var(--wood-walnut);
+  flex-shrink: 0;
+}
+
+.cassette-thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.cassette-meta {
+  min-width: 0;
+}
+
+.cassette-title-line {
+  display: flex;
+  align-items: center;
+  gap: 0.55rem;
+}
+
+.cassette-cat {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  color: var(--brass);
+  flex-shrink: 0;
+}
+
+.cassette-title {
+  font-weight: 600;
+  color: var(--parchment-light);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.cassette-sub {
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: 0.15rem;
+}
+
+.cassette-lufs {
+  font-family: var(--font-mono);
+  font-size: 0.76rem;
+  color: var(--parchment-mid);
+  background: var(--panel-inset);
+  border: 1px solid var(--border-subtle);
+  padding: 0.28rem 0.6rem;
+  border-radius: var(--radius-sm);
+  white-space: nowrap;
+}
+
+.cassette-row-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+
+.icon-mini-btn {
+  width: 30px;
+  height: 30px;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border-subtle);
+  background: var(--panel-inset);
+  color: var(--text-secondary);
+  display: grid;
+  place-items: center;
+  transition: border-color 140ms, color 140ms;
+}
+
+.icon-mini-btn:hover {
+  border-color: var(--border-brass);
+  color: var(--parchment-light);
+}
+
+.icon-mini-btn.is-danger:hover {
+  border-color: var(--oxblood-bright);
+  color: #f4a496;
+}
+
+.icon-mini-btn svg {
+  width: 14px;
+  height: 14px;
+}
+
+/* Empty State inside Cassette Bay */
+.empty-bay {
+  text-align: center;
+  padding: 2.25rem 1.25rem;
+  border: 1px dashed var(--border-brass);
+  border-radius: var(--radius-md);
+  background: rgba(37, 25, 18, 0.35);
+}
+
+.empty-bay p {
+  margin-inline: auto;
+  color: var(--text-secondary);
+  margin-bottom: 1rem;
+}
+
+/* Console Responsive */
+@media (max-width: 1020px) {
+  .console-main-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .turntable-deck {
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1.5rem;
+  }
+
+  .turntable-track-info {
+    text-align: left;
+    flex: 1 1 220px;
+  }
+
+  .turntable-cover-actions {
+    justify-content: flex-start;
+  }
+}
+
+@media (max-width: 760px) {
+  .metering-deck {
+    grid-template-columns: 1fr;
+  }
+
+  .telemetry-strip {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .cassette-row {
+    grid-template-columns: 42px minmax(0, 1fr);
+  }
+
+  .cassette-lufs,
+  .cassette-row-actions {
+    grid-column: 1 / -1;
+    justify-self: start;
+  }
+
+  .ab-hardware-switch {
+    width: 100%;
+    justify-content: space-between;
+  }
+
+  .ab-side-btn {
+    flex: 1;
+    min-width: 0;
+    padding-inline: 0.7rem;
+  }
+}
